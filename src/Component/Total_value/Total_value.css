@@ -88,3 +88,32 @@ width: 30% !important;
 .btn_css{
   border-radius: 12px !important;
 }
+
+.css-16fwhjm {
+  position: relative;
+  flex: 1 1 0%;
+  border-radius: 1rem;
+  background: linear-gradient(270deg, rgba(6, 97, 0, 0.8) 0%, rgba(0, 82, 73, 0.8) 50%) padding-box padding-box, linear-gradient(45deg, rgb(137, 210, 243), rgb(166, 124, 255)) border-box border-box !important;
+  border: 3px solid transparent !important;
+}
+.css-1mqe0od {
+  font-weight: 900 !important;
+  font-size: 0.875rem !important;
+  color: #fff !important;
+  text-transform: uppercase !important;
+  text-align: center !important;
+}
+.css-1snxiwx {
+  vertical-align: baseline;
+  font-weight: 600;
+  font-size: 1.5rem;
+  font-variant-numeric: proportional-nums;
+  display: flex;
+  width: max-content;
+  margin-inline: auto;
+}
+.css-je7iwd {
+  display: flex;
+  width: max-content;
+  margin-inline: auto;
+}

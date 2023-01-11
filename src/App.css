@@ -15,9 +15,11 @@
 .back_main{
   background: radial-gradient(100.93% 100.93% at 50.83% .66%,rgba(77,0,138,.85) 0,#001355 49.08%,#000535 100%) !important;
  z-index: -1 !important;
+ height: 100vh;
+ padding-bottom: 5rem !important;
 }
 .back{
-  background-image: url(../public/battle_staking.png);
+  background-image: url("../src/Component/Accets/battle_staking.png");
   background-position: right ;
   background-repeat: no-repeat;
 }

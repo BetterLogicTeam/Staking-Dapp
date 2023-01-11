@@ -1,19 +1,27 @@
-import React from 'react'
-import "./Connect.css"
+import React from "react";
+import "./Connect.css";
 
-function Connent() {
+function Connent({setShoww}) {
   return (
-    <div className='container-fluid mt-3 m-0 p-0'>
-      <div className="row  border_css  justify-content-center py-4 m-0">
-        <div className="col-lg-12">
-        <p>Connect your wallet to stake IBAT tokens!</p>
-
-<button className='btn btn-md lst_btnn mt-3 text-white btn_css'>Connect Wallet</button>
-        </div>
-
-      </div>
-    </div>
-  )
+    <section
+      class="staking__container staking__selector gradient-2 pb-5"
+      style={{
+        padding: "2rem max(9vw, 2rem)",
+        width: "max-content",
+        margin: "auto",
+        
+      }}
+    >
+      <p class="chakra-text css-0">Connect your wallet to stake IBAT tokens!</p>
+      <button
+        type="button"
+        class="chakra-button btn btn__connect_wallet btn-gradient-2 btn__connect_wallet--staking css-g1kjpk"
+        onClick={()=>setShoww(true)}
+      >
+        Connect Wallet
+      </button>
+    </section>
+  );
 }
 
-export default Connent
+export default Connent;
