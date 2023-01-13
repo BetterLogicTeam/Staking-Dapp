@@ -118,3 +118,7 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+.unlockBTN{
+    background: linear-gradient(98.76deg, rgb(56, 195, 207) 0%, rgb(135, 103, 211) 100%) !important;
+
+}

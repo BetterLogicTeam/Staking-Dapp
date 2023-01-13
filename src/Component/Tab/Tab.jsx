@@ -1,4 +1,4 @@
-import * as React from "react";
+import  React,{useEffect, useState} from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -9,6 +9,10 @@ import Lockestake from "../Lockestak/Lockestake";
 import Flextabs from "../Flextabs/Flextabs";
 import Connent from "../Connent/Connent";
 import './Tab_style.css'
+import Mylock from "../myLock/Mylock";
+import Web3 from "web3";
+import { Staking, Staking_Abi } from "../../utilies/constant";
+import { useSelector } from "react-redux";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -43,12 +47,14 @@ function a11yProps(index) {
   };
 }
 
-export default function BasicTabs({setShoww}) {
+export default function BasicTabs({setShoww,totalUserAmount}) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  
 
   return (
     <Box sx={{ width: "100%" }} className="text-light">
@@ -62,26 +68,27 @@ export default function BasicTabs({setShoww}) {
         >
           <Tab
             className="text-light mak_flxx_bttn"
-            label="Flexible"
+            label="Stake"
             {...a11yProps(0)}
           />
           <Tab
             className="text-light mak_flxx_bttn"
-            label="Locked"
+            label="Staked History"
             {...a11yProps(1)}
           />
         </Tabs>
       </Box>
-      <TabPanel value={value} index={0}>
+      <TabPanel value={value} index={1}>
         {/* <Flexible/> */}
-        <div className="my-4">
+        {/* <div className="my-4">
         <h2 class="staking__heading">Flexible Staking</h2>
         <div class="staking__apy"><span class="staking__tvl_text">APY:</span><span class="staking__tvl_value" style={{color: "rgb(136, 209, 242)", fontWeight: "700"}}>12%</span></div>
         <div class="staking__tvl"><span class="staking__tvl_text">Total $IBAT in Flexible Staking</span><span class="staking__tvl_value" style={{color: "rgb(136, 209, 242)", fontWeight: "700"}}>606,080,547.086 IBAT</span></div>
-        </div>
-        <Flextabs setShoww={setShoww} />
+        </div> */}
+        {/* <Flextabs setShoww={setShoww} /> */}
+        <Mylock setShoww={setShoww}/>
       </TabPanel>
-      <TabPanel value={value} index={1}>
+      <TabPanel value={value} index={0}>
         <div class="staking">
           <h2 class="staking__heading">Locked Staking</h2>
           <div class="staking__tvl">
@@ -90,7 +97,7 @@ export default function BasicTabs({setShoww}) {
               class="staking__tvl_value"
               style={{ color: "rgb(136, 209, 242)", fontWeight: "700" }}
             >
-              884,746,461.665 IBAT
+              {totalUserAmount} IBAT
             </span>
           </div>
         </div>

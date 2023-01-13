@@ -11,10 +11,10 @@ export const connectWalletAction = (chose) => async (dispatch) => {
     if (chose === 1) {
       let provider = new WalletConnectProvider({
         infuraId: "6caa6ac543a94eacaf54e0ca062fcc99",
-        // bridge: BRIDGE_URL,
-        // rpc: {
-          //   [CHAIN_ID]: RPC_URL,
-          // },
+        bridge: BRIDGE_URL,
+        rpc: {
+            [CHAIN_ID]: RPC_URL,
+          },
         });
         
         console.log("chose",provider);

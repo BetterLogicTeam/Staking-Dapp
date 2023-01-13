@@ -10,6 +10,11 @@ import {
 } from "../../utilies/constant";
 import Connent from "../Connent/Connent";
 import "./Lockestake.css";
+import Countdown from "react-countdown";
+import moment from "moment/moment";
+import { Button, Popover } from "antd";
+import { Modal, Space } from "antd";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
 
 function Lockestake({ setShoww }) {
   let { provider, acc, providerType, web3 } = useSelector(
@@ -20,7 +25,6 @@ function Lockestake({ setShoww }) {
   const [Active, setActive] = useState(0);
   const [spinner, setspinner] = useState(false);
   const [balance, setbalance] = useState(0);
-  const [UserInformationStak, setUserInformationStak] = useState();
 
   const staking_Amount = async () => {
     try {
@@ -62,40 +66,28 @@ function Lockestake({ setShoww }) {
       setspinner(false);
     }
   };
-
   const checkBalance = async () => {
     const webSupply = new Web3(
-      "https://data-seed-prebsc-1-s1.binance.org:8545"
+        "https://data-seed-prebsc-1-s1.binance.org:8545"
     );
 
     let tokenContractOf = new webSupply.eth.Contract(Token_Abi, TokenAddress);
     let stakingContractOf = new webSupply.eth.Contract(Staking_Abi, Staking);
 
     if (acc != null) {
-      let blanceOf = await tokenContractOf.methods.balanceOf(acc).call();
+        let blanceOf = await tokenContractOf.methods.balanceOf(acc).call();
 
-      blanceOf = blanceOf.slice(0, 8);
-      console.log("blanceOf", blanceOf);
-      setbalance(blanceOf);
+        blanceOf = blanceOf.slice(0, 8);
+        // console.log("blanceOf", blanceOf);
+        setbalance(blanceOf);
 
-      let UserInformation = await stakingContractOf.methods
-        .UserInformation(acc)
-        .call();
-
-        let array1=UserInformation[0]
-        let array2=UserInformation[1]
-        let array3=UserInformation[2]
-
-        let newarray= array1.concat(array2)
-
-      console.log("UserInformation",newarray);
-      setUserInformationStak(UserInformation[0]);
+       
     }
-  };
+};
 
-  useEffect(() => {
+useEffect(() => {
     checkBalance();
-  });
+}, []);
 
   return (
     <>
@@ -235,32 +227,7 @@ function Lockestake({ setShoww }) {
               </div>
             </div>
 
-            <table class="table mt-5 text-white table-striped">
-              <thead>
-                <tr>
-                  <th scope="col">Address</th>
-                  <th scope="col">Stak Amount</th>
-                  <th scope="col">Staking Time</th>
-                  <th scope="col">Unstaking Time</th>
-                  <th scope="col">Unstaking</th>
-                </tr>
-              </thead>
-              <tbody>
-                {UserInformationStak?.map((items, index) => {
-                  return (
-                    <>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                      </tr>
-                    </>
-                  );
-                })}
-              </tbody>
-            </table>
+         
           </div>
         </>
       )}
