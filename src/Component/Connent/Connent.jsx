@@ -4,7 +4,7 @@ import "./Connect.css";
 function Connent({setShoww}) {
   return (
     <section
-      class="staking__container staking__selector gradient-2 pb-5"
+      class="staking__container staking__selector gradient-2 pb-5 hdr_cl"
       style={{
         padding: "2rem max(9vw, 2rem)",
         width: "max-content",

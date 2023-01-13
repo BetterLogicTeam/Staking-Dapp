@@ -1,6 +1,9 @@
 .main_logo{
     width: 25%;
 }
+.head_logo{
+    font-style: italic;
+}
 @media only screen and (max-width:600px) {
     .main_logo{
         width: 85%;

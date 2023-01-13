@@ -144,7 +144,7 @@ export default function Mylock({ setShoww }) {
                     </>
                 ) : (
                     <>
-                        <table class="table mt-5 text-white mytable " >
+                        <table class="table mt-5 text-white  " >
                             <thead>
                                 <tr>
                                     <th scope="col">Address</th>

@@ -81,3 +81,13 @@
   font-style: italic;
   color: #fff!important;
 }
+
+.hdr_cl{
+  /* width: 100% !important; */
+}
+
+@media only screen and (max-width:600px) {
+  .hdr_cl{
+    width: 100% !important;
+  }
+}

@@ -1,5 +1,13 @@
-.mytable{
 
-    /* width: 5rem !important; */
-    overflow-x: scroll;
-}
+
+/* table {
+    overflow-x: auto;
+    display: inline-block;
+} */
+
+@media screen and (max-width: 640px) {
+    table {
+        overflow-x: auto;
+        display: inline-block;
+    }
+    }
