@@ -19,7 +19,6 @@ export default function Mylock({ setShoww }) {
     const [spinner, setspinner] = useState(false)
 
 
-
     const checkBalance = async () => {
         const webSupply = new Web3(
             "https://data-seed-prebsc-1-s1.binance.org:8545"
@@ -54,6 +53,7 @@ export default function Mylock({ setShoww }) {
                 };
                 myArray = [...myArray, obj];
             }
+
             setUserInformationStak(myArray);
         }
     };
@@ -137,14 +137,15 @@ export default function Mylock({ setShoww }) {
     };
     return (
         <div>
-            <div className="container-fluid p-0" style={{ height: "50vh" }}>
+            <div className="container-fluid p-0" >
                 {acc == null ? (
                     <>
                         <Connent setShoww={setShoww} />
                     </>
                 ) : (
                     <>
-                        <table class="table mt-5 text-white  " >
+                    <div className=''>
+                        <table class="table mt-5 text-white " >
                             <thead>
                                 <tr>
                                     <th scope="col">Address</th>
@@ -154,7 +155,7 @@ export default function Mylock({ setShoww }) {
                                     <th scope="col">Unstaked</th>
                                 </tr>
                             </thead>
-                            <tbody className="text-white">
+                            <tbody className="text-white " >
                                 {UserInformationStak?.map((items, index) => {
 
                                     console.log("unloacktime", parseInt(items.unLoackTime) >= parseInt(Date.now() / 1000));
@@ -196,6 +197,7 @@ export default function Mylock({ setShoww }) {
                                 })}
                             </tbody>
                         </table>
+                    </div>
                     </>
                 )
                 }

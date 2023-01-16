@@ -14,14 +14,31 @@
 }
 .back_main{
   background: radial-gradient(100.93% 100.93% at 50.83% .66%,rgba(77,0,138,.85) 0,#001355 49.08%,#000535 100%) !important;
- z-index: -1 !important;
- height: 100vh;
- padding-bottom: 5rem !important;
+ /* z-index:  !important; */
+ /* background-color: #001355; */
+
+ 
+ /* height: 100% !important; */
+ /* padding-bottom: 5rem !important; */
 }
+
+@media only screen and (max-width:600px) {
+  .back_main{
+    background: radial-gradient(100.93% 100.93% at 50.83% .66%,rgba(77,0,138,.85) 0,#001355 49.08%,#000535 100%) !important;
+   z-index: -1 !important;
+   /* min-height: 100vh !important; */
+  
+   /* height: 100% !important; */
+   /* padding-bottom: 5rem !important; */
+  }
+}
+
 .back{
   background-image: url("../src/Component/Accets/battle_staking.png");
   background-position: right ;
   background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100% !important;
 }
 
 .App-header {
