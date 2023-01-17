@@ -15,7 +15,7 @@ function Total_value({setShoww}) {
   const TotalAmount =async()=>{
     try{
       const webSupply = new Web3(
-        "https://data-seed-prebsc-1-s1.binance.org:8545"
+        "https://bsc-testnet.public.blastapi.io"
     );
 
 

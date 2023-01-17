@@ -12,30 +12,62 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-.back_main{
-  background: radial-gradient(100.93% 100.93% at 50.83% .66%,rgba(77,0,138,.85) 0,#001355 49.08%,#000535 100%) !important;
- /* z-index:  !important; */
- /* background-color: #001355; */
 
- 
- /* height: 100% !important; */
- /* padding-bottom: 5rem !important; */
+.back_main {
+  background: radial-gradient(100.93% 100.93% at 50.83% .66%, rgba(77, 0, 138, .85) 0, #001355 49.08%, #000535 100%) !important;
+  /* z-index:  !important; */
+  /* background-color: #001355; */
+  height: auto !important;
+
+  /* height: 100% !important; */
+  padding-bottom: 5rem !important;
 }
-
 @media only screen and (max-width:600px) {
-  .back_main{
-    background: radial-gradient(100.93% 100.93% at 50.83% .66%,rgba(77,0,138,.85) 0,#001355 49.08%,#000535 100%) !important;
-   z-index: -1 !important;
-   /* min-height: 100vh !important; */
-  
-   /* height: 100% !important; */
-   /* padding-bottom: 5rem !important; */
+  .back_main {
+    background: radial-gradient(100.93% 100.93% at 50.83% .66%, rgba(77, 0, 138, .85) 0, #001355 49.08%, #000535 100%) !important;
+    /* z-index: -1 !important; */
+    /* min-height: 100vh !important; */
+    height: 130vh !important;
+  padding-bottom: 5rem !important;
+
+
+  }
+}
+@media (min-width:600px) and (max-width:800px) {
+  .back_main {
+    background: radial-gradient(100.93% 100.93% at 50.83% .66%, rgba(77, 0, 138, .85) 0, #001355 49.08%, #000535 100%) !important;
+    /* z-index: -1 !important; */
+    /* min-height: 100vh !important; */
+    height: auto !important;
+  padding-bottom: 5rem !important;
+
+
   }
 }
 
-.back{
+@media (min-width:800px) and (max-width:1440px) {
+  .back_main {
+    background: radial-gradient(100.93% 100.93% at 50.83% .66%, rgba(77, 0, 138, .85) 0, #001355 49.08%, #000535 100%) !important;
+
+    height: 140vh !important;
+
+
+  }
+}
+
+@media (min-width:1440px) and (max-width:3500px) {
+  .back_main {
+    background: radial-gradient(100.93% 100.93% at 50.83% .66%, rgba(77, 0, 138, .85) 0, #001355 49.08%, #000535 100%) !important;
+
+    height: 100vh !important;
+
+
+  }
+}
+
+.back {
   background-image: url("../src/Component/Accets/battle_staking.png");
-  background-position: right ;
+  background-position: right;
   background-repeat: no-repeat;
   background-attachment: fixed;
   min-height: 100% !important;
@@ -60,6 +92,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

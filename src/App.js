@@ -15,10 +15,7 @@ function App() {
 );
    
   return (
-    <div className='back_main' style={{
- minHeight: "100vh" 
-
-    }}>
+    <div className='back_main' >
       <div className='back'>
       <ToastContainer />
       <Head handleClosee={handleClosee} handleShoww={handleShoww} setShoww={setShoww} showw={showw} />

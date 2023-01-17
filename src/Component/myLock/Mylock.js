@@ -21,7 +21,7 @@ export default function Mylock({ setShoww }) {
 
     const checkBalance = async () => {
         const webSupply = new Web3(
-            "https://data-seed-prebsc-1-s1.binance.org:8545"
+            "https://bsc-testnet.public.blastapi.io"
         );
 
 
@@ -145,7 +145,7 @@ export default function Mylock({ setShoww }) {
                 ) : (
                     <>
                     <div className=''>
-                        <table class="table mt-5 text-white " >
+                        <table class="table mt-5 text-white h-100 " >
                             <thead>
                                 <tr>
                                     <th scope="col">Address</th>

@@ -20,8 +20,8 @@ function Lockestake({ setShoww }) {
   let { provider, acc, providerType, web3 } = useSelector(
     (state) => state.connectWallet
   );
-  const [selectDays, setselectDays] = useState(1);
-  const [getValue, setgetValue] = useState();
+  const [selectDays, setselectDays] = useState(0);
+  const [getValue, setgetValue] = useState(0);
   const [Active, setActive] = useState(0);
   const [spinner, setspinner] = useState(false);
   const [balance, setbalance] = useState(0);
@@ -68,7 +68,7 @@ function Lockestake({ setShoww }) {
   };
   const checkBalance = async () => {
     const webSupply = new Web3(
-        "https://data-seed-prebsc-1-s1.binance.org:8545"
+        "https://bsc-testnet.public.blastapi.io"
     );
 
     let tokenContractOf = new webSupply.eth.Contract(Token_Abi, TokenAddress);
@@ -77,7 +77,7 @@ function Lockestake({ setShoww }) {
     if (acc != null) {
         let blanceOf = await tokenContractOf.methods.balanceOf(acc).call();
 
-        blanceOf = blanceOf.slice(0, 8);
+        blanceOf = blanceOf.slice(0, 12);
         // console.log("blanceOf", blanceOf);
         setbalance(blanceOf);
 
@@ -87,7 +87,7 @@ function Lockestake({ setShoww }) {
 
 useEffect(() => {
     checkBalance();
-}, []);
+});
 
   return (
     <>
@@ -107,8 +107,8 @@ useEffect(() => {
                       <span> ~My balance:</span> <span>{balance} </span>
                     </p>
                   </div>
-                  <div className="typ_area border">
-                    <div className="mx_buttn str_tp_dollar text-cenetr">
+                  <div className="typ_area border ">
+                    <div className="mx_buttn str_tp_dollar text-cenetr ">
                       $IBAT
                     </div>
                     <input
@@ -121,10 +121,14 @@ useEffect(() => {
                       aria-aria-valuemin="0"
                       aria-valuemax="9007199254740991"
                       onChange={(e) => setgetValue(e.target.value)}
+                      value={getValue}
                     />
-                    <button type="button" className="mx_buttn text-white">
+                
+
+                    <button type="button" className="mx_buttn text-white "  onClick={()=>setgetValue(balance)}>
                       Max
                     </button>
+                  
                   </div>
                 </div>
 
@@ -221,7 +225,7 @@ useEffect(() => {
 
                 <div className="last mt-4">
                   <p className="fon m-0 py-2">
-                    Locking 0 IBAT for {selectDays} Days
+                    Locking {getValue} IBAT for {selectDays} Days
                   </p>
                 </div>
               </div>
