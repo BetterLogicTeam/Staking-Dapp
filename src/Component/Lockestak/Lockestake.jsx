@@ -7,6 +7,9 @@ import {
   Staking_Abi,
   TokenAddress,
   Token_Abi,
+  ArchieMetaNFT,
+  nftTokenAddress,
+  nftToken_Abi
 } from "../../utilies/constant";
 import Connent from "../Connent/Connent";
 import "./Lockestake.css";
@@ -16,7 +19,7 @@ import { Button, Popover } from "antd";
 import { Modal, Space } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 
-function Lockestake({ setShoww }) {
+function Lockestake({ setShoww,selectedCard }) {
   let { provider, acc, providerType, web3 } = useSelector(
     (state) => state.connectWallet
   );
@@ -27,6 +30,7 @@ function Lockestake({ setShoww }) {
   const [balance, setbalance] = useState(0);
 
   const staking_Amount = async () => {
+    alert(selectedCard)
     try {
       if (selectDays == 1) {
         toast.error("Please Select Days");
@@ -41,8 +45,8 @@ function Lockestake({ setShoww }) {
             setspinner(true);
             let stakingContractOf = new web3.eth.Contract(Staking_Abi, Staking);
             let tokenContractOf = new web3.eth.Contract(
-              Token_Abi,
-              TokenAddress
+              nftToken_Abi,
+              nftTokenAddress
             );
             let stakingValue = web3.utils.toWei(getValue);
 
@@ -52,7 +56,7 @@ function Lockestake({ setShoww }) {
             });
             toast.success("Approve Confirmed");
             await stakingContractOf.methods
-              .farm(stakingValue, selectDays)
+              .farm(stakingValue, selectDays,selectedCard)
               .send({
                 from: acc,
               });

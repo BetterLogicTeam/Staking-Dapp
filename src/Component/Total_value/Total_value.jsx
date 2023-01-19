@@ -74,7 +74,7 @@ function Total_value({setShoww}) {
       <div className="container">
         <div className="row  text-white">
           <div className="text-center m-auto">
-            <Tab setShoww={setShoww} totalUserAmount={totalUserAmount}  />
+            <Tab setShoww={setShoww} totalUserAmount={totalUserAmount} selectedCard="one"  />
           </div>
         </div>
       </div>

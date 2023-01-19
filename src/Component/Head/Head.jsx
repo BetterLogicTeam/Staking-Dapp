@@ -1,23 +1,48 @@
-import React from 'react'
-import "./Head.css"
-import logo from "../../Component/Accets/V7.png"
-import Canvas from '../Canvas/Canvas'
-function Head({handleClosee,handleShoww,setShoww,showw}) {
+import React from "react";
+import "./Head.css";
+import logo from "../../Component/Accets/V9.png";
+import Canvas from "../Canvas/Canvas";
+import { Container, Nav, Navbar } from "react-bootstrap";
+import { Link } from "react-router-dom";
+function Head({ handleClosee, handleShoww, setShoww, showw }) {
   return (
-    <div className='bg-dark py-2 '>
-      <div className="container-fluid">
-        <div className="row">
-            <div className="col-6 d-flex justify-content-start">
-                <img src={logo} className="main_logo" alt="" />
-                {/* <h2 className="head_logo text-white text-start ms-2"></h2> */}
-            </div>
-            <div className="col-6 mt-2">
-                <Canvas handleClosee={handleClosee} handleShoww={handleShoww} setShoww={setShoww} showw={showw}/>
-            </div>
-        </div>
-      </div>
-    </div>
-  )
+    <>
+      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Container>
+          <Navbar.Brand href="#home" className="navBrand">
+            <img src={logo} className="main_logo" alt="" />
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="me-auto">
+              {/* <Nav.Link href="#features">Features</Nav.Link>
+              <Nav.Link href="#pricing">Pricing</Nav.Link> */}
+            </Nav>
+            <Nav className="navRescenter">
+              <Link to="/" style={{textDecoration:"none"}}>
+                <Nav.Link href="/" className="mt-2 text-white">
+                  Token STAKING
+                </Nav.Link>
+              </Link>
+              <Link to="/Nft_Staking" style={{textDecoration:"none"}}>
+                <Nav.Link href="/Nft_Staking" className="mt-2 text-white">
+                  NFT STAKING
+                </Nav.Link>
+              </Link>
+              <Nav.Link eventKey={2} href="#memes">
+                <Canvas
+                  handleClosee={handleClosee}
+                  handleShoww={handleShoww}
+                  setShoww={setShoww}
+                  showw={showw}
+                />
+              </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+    </>
+  );
 }
 
-export default Head
+export default Head;
