@@ -5,13 +5,13 @@ import { Button, Popover } from "antd";
 import { Modal, Space } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { useSelector } from 'react-redux';
-import { Staking, Staking_Abi } from '../../utilies/constant';
+import { Staking, Staking_Abi, tokenStaking, tokenStaking_Abi } from '../../utilies/constant';
 import Web3 from 'web3';
 import { toast } from 'react-toastify';
 import Connent from '../Connent/Connent';
 import './mylockStyle.css'
 
-export default function Mylock({ setShoww }) {
+export default function Mylock({ setShoww,check }) {
     let { provider, acc, providerType, web3 } = useSelector(
         (state) => state.connectWallet
     );
@@ -23,9 +23,15 @@ export default function Mylock({ setShoww }) {
         const webSupply = new Web3(
             "https://bsc-testnet.public.blastapi.io"
         );
+        let stakingContractOf
+        if(check=="one"){
+             stakingContractOf = new webSupply.eth.Contract(tokenStaking_Abi, tokenStaking);
 
+        }else{
+             stakingContractOf = new webSupply.eth.Contract(Staking_Abi, Staking);
 
-        let stakingContractOf = new webSupply.eth.Contract(Staking_Abi, Staking);
+        }
+
 
         if (acc != null) {
 
@@ -119,7 +125,14 @@ export default function Mylock({ setShoww }) {
         try {
 
             setspinner(true)
-            let stakingContractOf = new web3.eth.Contract(Staking_Abi, Staking);
+            let stakingContractOf
+            if(check=="one"){
+
+                stakingContractOf = new web3.eth.Contract(tokenStaking_Abi, tokenStaking);
+            }else{
+                stakingContractOf = new web3.eth.Contract(Staking_Abi, Staking);
+
+            }
 
 
             await stakingContractOf.methods.harvest([index]).send({
@@ -137,6 +150,7 @@ export default function Mylock({ setShoww }) {
     };
     return (
         <div>
+         
             <div className="container-fluid p-0" >
                 {acc == null ? (
                     <>

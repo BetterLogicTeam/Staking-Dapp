@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Total_value.css";
 import Tab from "../Tab/Tab";
-import { Staking, Staking_Abi } from "../../utilies/constant";
+import { Staking, Staking_Abi, tokenStaking, tokenStaking_Abi } from "../../utilies/constant";
 import Web3 from "web3";
 import { useSelector } from "react-redux";
 function Total_value({setShoww}) {
@@ -19,7 +19,7 @@ function Total_value({setShoww}) {
     );
 
 
-    let stakingContractOf = new webSupply.eth.Contract(Staking_Abi, Staking);
+    let stakingContractOf = new webSupply.eth.Contract(tokenStaking_Abi, tokenStaking);
 
     if (acc != null) {
 

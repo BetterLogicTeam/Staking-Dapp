@@ -47,112 +47,108 @@ function a11yProps(index) {
   };
 }
 
-export default function BasicTabs({ setShoww, totalUserAmount ,selectedCard}) {
+export default function BasicTabs({ setShoww, totalUserAmount, selectedCard }) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-
-  return (<>
-  {
-    selectedCard=="one" ? (
-      <>
- <Box sx={{ width: "100%" }} className="text-light">
-      <Box sx={{}}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label="basic tabs example"
-          className="tab-css"
-          centered
-        >
-          <Tab
-            className="text-light mak_flxx_bttn"
-            label="Stake"
-            {...a11yProps(0)}
-          />
-          <Tab
-            className="text-light mak_flxx_bttn"
-            label="Staked History"
-            {...a11yProps(1)}
-          />
-        </Tabs>
-      </Box>
-      <TabPanel value={value} index={1}>
-        <Mylock setShoww={setShoww} />
-      </TabPanel>
-      <TabPanel value={value} index={0}>
-        <div class="staking">
-          <h2 class="staking__heading">Locked Staking</h2>
-          <div class="staking__tvl">
-            <span class="staking__tvl_text">Total $IBAT in Locked Staking</span>
-            <span
-              class="staking__tvl_value"
-              style={{ color: "rgb(136, 209, 242)", fontWeight: "700" }}
-            >
-              {totalUserAmount} IBAT
-            </span>
-          </div>
-        </div>
-       
-        <Lockestake setShoww={setShoww} selectedCard={selectedCard} />
-      </TabPanel>
-    </Box>
-      </>
-
-    ):
-    
+  return (
     <>
-     <Box sx={{ width: "100%" }} className="text-light">
-      <Box sx={{}}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label="basic tabs example"
-          className="tab-css"
-          centered
-        >
-          <Tab
-            className="text-light mak_flxx_bttn"
-            label="Stake"
-            {...a11yProps(0)}
-          />
-          <Tab
-            className="text-light mak_flxx_bttn"
-            label="Staked History"
-            {...a11yProps(1)}
-          />
-        </Tabs>
-      </Box>
-      <TabPanel value={value} index={1}>
-        <Mylock setShoww={setShoww} />
-      </TabPanel>
-      <TabPanel value={value} index={0}>
-        <div class="staking">
-          <h2 class="staking__heading">Locked Staking</h2>
-          <div class="staking__tvl">
-            <span class="staking__tvl_text">Total $IBAT in Locked Staking</span>
-            <span
-              class="staking__tvl_value"
-              style={{ color: "rgb(136, 209, 242)", fontWeight: "700" }}
-            >
-              {totalUserAmount} IBAT
-            </span>
-          </div>
-        </div>
-       
-       
-        <Lockestake setShoww={setShoww} selectedCard={selectedCard} />
-      </TabPanel>
-    </Box>
-    </>
-  }
+      {selectedCard == "one" ? (
+        <>
+          <Box sx={{ width: "100%" }} className="text-light ">
+            <Box sx={{}}>
+              <Tabs
+                value={value}
+                onChange={handleChange}
+                aria-label="basic tabs example"
+                className="tab-css"
+                centered
+              >
+                <Tab
+                  className="text-light mak_flxx_bttn"
+                  label="Stake"
+                  {...a11yProps(0)}
+                />
+                <Tab
+                  className="text-light mak_flxx_bttn"
+                  label="Staked History"
+                  {...a11yProps(1)}
+                />
+              </Tabs>
+            </Box>
+            <TabPanel value={value} index={1}>
+              <Mylock setShoww={setShoww} check="one" />
+            </TabPanel>
+            <TabPanel value={value} index={0}>
+              <div class="staking">
+                <h2 class="staking__heading">Locked Staking</h2>
+                <div class="staking__tvl">
+                  <span class="staking__tvl_text">
+                    Total $IBAT in Locked Staking
+                  </span>
+                  <span
+                    class="staking__tvl_value"
+                    style={{ color: "rgb(136, 209, 242)", fontWeight: "700" }}
+                  >
+                    {totalUserAmount} IBAT
+                  </span>
+                </div>
+              </div>
 
-   
-  
-  
-  </>
+              <Lockestake setShoww={setShoww} selectedCard={selectedCard} check="one" />
+            </TabPanel>
+          </Box>
+        </>
+      ) : (
+        <>
+          <Box sx={{ width: "100%" }} className="text-light">
+            <Box sx={{}}>
+              <Tabs
+                value={value}
+                onChange={handleChange}
+                aria-label="basic tabs example"
+                className="tab-css"
+                centered
+              >
+                <Tab
+                  className="text-light mak_flxx_bttn"
+                  label="Stake"
+                  {...a11yProps(0)}
+                />
+                <Tab
+                  className="text-light mak_flxx_bttn"
+                  label="Staked History"
+                  {...a11yProps(1)}
+                />
+              </Tabs>
+            </Box>
+            <TabPanel value={value} index={1}>
+              <Mylock setShoww={setShoww} check="two" />
+            </TabPanel>
+            <TabPanel value={value} index={0}>
+              <div class="staking">
+                <h2 class="staking__heading">Locked Staking</h2>
+                <div class="staking__tvl">
+                  <span class="staking__tvl_text">
+                    Total $IBAT in Locked Staking
+                  </span>
+                  <span
+                    class="staking__tvl_value"
+                    style={{ color: "rgb(136, 209, 242)", fontWeight: "700" }}
+                  >
+                    {totalUserAmount} IBAT
+                  </span>
+                </div>
+              </div>
+
+              <Lockestake setShoww={setShoww} selectedCard={selectedCard} check="two"/>
+            </TabPanel>
+          </Box>
+        </>
+      )}
+    </>
   );
 }

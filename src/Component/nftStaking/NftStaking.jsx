@@ -16,113 +16,73 @@ export default function NftStaking({ setShoww }) {
   let { provider, acc, providerType, web3 } = useSelector(
     (state) => state.connectWallet
   );
+  
+  const [totalUserAmount, settotalUserAmount] = useState(0)
+  const [WithdrawReward, setWithdrawReward] = useState(0)
 
-  const [selectedCard, setselectedCard] = useState();
-  const [cradShow, setcradShow] = useState([]);
-  const [stakeddata, setstakeddata] = useState();
+  const TotalAmount =async()=>{
+    try{
+      const webSupply = new Web3(
+        "https://bsc-testnet.public.blastapi.io"
+    );
 
-  const SelectedCard = async (id) => {
-    try {
-      setselectedCard(id);
-    } catch (e) {
-      console.log("Error while Selected Card", e);
-    }
-  };
 
-  const TotalAmount = async () => {
-    try {
-      const webSupply = new Web3("https://bsc-testnet.public.blastapi.io");
-      let stakingContractOf = new webSupply.eth.Contract(Staking_Abi, Staking);
-      let nFTContractOf = new webSupply.eth.Contract(
-        ArchieMetaNFT_Abi,
-        ArchieMetaNFT
-      );
+    let stakingContractOf = new webSupply.eth.Contract(Staking_Abi, Staking);
 
-      let array = [];
-      if (acc != null) {
-        let UserNFTs = await nFTContractOf.methods.walletOfOwner(acc).call();
+    if (acc != null) {
 
-        let UserNFTs_Length = UserNFTs.length;
-        console.log("UserNFTs", UserNFTs_Length);
-        for (let i = 0; i < UserNFTs_Length; i++) {
-          let nftLink = await axios.get(
-            `https://teal-high-elephant-254.mypinata.cloud/ipfs/QmRN9mG46UtACjCmtwjnqz2pmDei2tUP6zB23NpFw8wk8C/${
-              UserNFTs[i + 1]
-            }.png`
-          );
-          let isNFTStaked = await stakingContractOf.methods
-            .isNFTStaked(i)
+
+        let UserInformation = await stakingContractOf.methods
+            .Users(acc)
             .call();
-          if (isNFTStaked == true) {
-            setstakeddata(i);
-          }
-          let imgurl = nftLink.config.url;
-          console.log("nftLink", nftLink.config.url);
-          array = [...array, { imgurl: imgurl, tokenid: UserNFTs[i] }];
-          setcradShow(array);
-        }
-      }
-    } catch (e) {}
-  };
+            console.log("Users",UserInformation.DepositeToken);
+
+           let UserInformationdata=web3.utils.fromWei(UserInformation.DepositeToken)
+           let WithdrawRewardAmount=web3.utils.fromWei(UserInformation.WithdrawReward)
+
+           setWithdrawReward(parseFloat(WithdrawRewardAmount).toFixed(3))
+            settotalUserAmount(UserInformationdata)
+    }
+
+
+    }catch(e){
+
+    }
+  }
 
   useEffect(() => {
-    TotalAmount();
-  }, [acc]);
+    TotalAmount()
+  })
+
 
   return (
     <div>
-      <div className="container">
-        <div className="row">
-          {cradShow?.map((items, index) => {
-            return (
-              <>
-                <div
-                  className="col-lg-3 mt-3"
-                  onClick={() => SelectedCard(index)}
-                >
-                  <div
-                  // className={stakeddata==index ? "overlay game-item":"game-item"}
-                    class="game-item contain"
-                    style={{
-                      border:
-                      selectedCard == index
-                      ? "5px solid rgb(56, 195, 207)"
-                      : "none",
-                      border: stakeddata == index ? "10px solid red" : "none",
-                    }}
-                  >
-                    <div class="game-inner">
-                      <div class="game-item__thumb">
-                        <img
-                          src={items.imgurl}
-                          alt="game"
-                          style={{ zIndex: "100000" }}
-                        />
-                        <div class="game-item__content">
-                          <h4 class="title">{items.tokenid}</h4>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="mask"> </div>
-                    <div class="ball"> </div>
-                  <div
-                  className="middle"
-                  //  className={stakeddata==index ? "middle":""} 
-                   style={{ display: stakeddata == index ? "block" : "none",}}>This NFt is stake</div>
-
-                  </div>
-                  {/* <img src={items} alt="" width="100%" className="border" /> */}
-                </div>
-              </>
-            );
-          })}
-        </div>
+      
+      <div
+        class="chakra-stat css-16fwhjm"
+        style={{
+          padding: "1rem 2rem 0.5rem",
+          width: "max-content",
+          minWidth: "265px",
+          margin: "1rem auto",
+          boxShadow: "rgb(116, 54, 128) 0px 0px 50px 0px",
+         height:"8rem"
+        }}
+      >
+        <dl>
+          <dt class="chakra-stat__label css-1mqe0od">Total Value Locked</dt>
+          <dd class="chakra-stat__number css-1snxiwx">
+            <p class="chakra-text css-0 text-white">${totalUserAmount}</p>
+          </dd>
+          <div class="css-je7iwd  text-white" style={{marginTop:"-1rem"}}>
+            <p class="chakra-text css-1veligu">$ {WithdrawReward} WithdrawReward</p>
+          </div>
+        </dl>
       </div>
-
       <div className="container">
-        <div className="row  text-white">
-          <div className="text-center m-auto">
-            <Tab setShoww={setShoww} selectedCard={selectedCard} />
+        <div className="row  text-white mt-5">
+          <div className="text-center m-auto mt-5">
+            <Tab setShoww={setShoww}  totalUserAmount={totalUserAmount} />
           </div>
         </div>
       </div>
