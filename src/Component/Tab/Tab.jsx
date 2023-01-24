@@ -87,13 +87,13 @@ export default function BasicTabs({ setShoww, totalUserAmount, selectedCard }) {
                 <h2 class="staking__heading">Locked Staking</h2>
                 <div class="staking__tvl">
                   <span class="staking__tvl_text">
-                    Total $IBAT in Locked Staking
+                    Total $Archie in Locked Staking
                   </span>
                   <span
                     class="staking__tvl_value"
                     style={{ color: "rgb(136, 209, 242)", fontWeight: "700" }}
                   >
-                    {totalUserAmount} IBAT
+                    {totalUserAmount} Archie
                   </span>
                 </div>
               </div>
@@ -133,13 +133,13 @@ export default function BasicTabs({ setShoww, totalUserAmount, selectedCard }) {
                 <h2 class="staking__heading">Locked Staking</h2>
                 <div class="staking__tvl">
                   <span class="staking__tvl_text">
-                    Total $IBAT in Locked Staking
+                    Total $Archie in Locked Staking
                   </span>
                   <span
                     class="staking__tvl_value"
                     style={{ color: "rgb(136, 209, 242)", fontWeight: "700" }}
                   >
-                    {totalUserAmount} IBAT
+                    {totalUserAmount} Archie
                   </span>
                 </div>
               </div>

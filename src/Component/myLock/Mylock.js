@@ -152,11 +152,7 @@ export default function Mylock({ setShoww,check }) {
         <div>
          
             <div className="container-fluid p-0" >
-                {acc == null ? (
-                    <>
-                        <Connent setShoww={setShoww} />
-                    </>
-                ) : (
+               
                     <>
                     <div className=''>
                         <table class="table mt-5 text-white h-100 " >
@@ -213,8 +209,7 @@ export default function Mylock({ setShoww,check }) {
                         </table>
                     </div>
                     </>
-                )
-                }
+                
             </div>
 
         </div>

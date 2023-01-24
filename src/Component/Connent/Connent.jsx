@@ -12,7 +12,7 @@ function Connent({setShoww}) {
         
       }}
     >
-      <p class="chakra-text css-0">Connect your wallet to stake IBAT tokens!</p>
+      <p class="chakra-text css-0">Connect your wallet to stake Archie tokens!</p>
       <button
         type="button"
         class="chakra-button btn btn__connect_wallet btn-gradient-2 btn__connect_wallet--staking css-g1kjpk"

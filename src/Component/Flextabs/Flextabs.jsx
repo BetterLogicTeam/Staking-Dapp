@@ -90,7 +90,7 @@ export default function BasicTabs({setShoww}) {
                         </div>
                         <div className="typ_area border">
                           <div className="mx_buttn str_tp_dollar text-cenetr">
-                            $IBAT
+                            $Archie
                           </div>
                           <input
                             className="ariia"
@@ -108,7 +108,7 @@ export default function BasicTabs({setShoww}) {
                         </div>
                         <p className="text-start min_st_rt mt-2">
                           {" "}
-                          Min Stake Amount :&nbsp;8000 IBAT
+                          Min Stake Amount :&nbsp;8000 Archie
                         </p>
                         <button className="btn btn-md lst_btnn text-white">
                           Enable Staking
@@ -124,12 +124,12 @@ export default function BasicTabs({setShoww}) {
                         <div className="munt_box d-flex justify-content-between">
                           <span>Amount</span>
                           <p className="my_balnc">
-                            <span> ~Staked IBAT:</span> <span>0</span>
+                            <span> ~Staked Archie:</span> <span>0</span>
                           </p>
                         </div>
                         <div className="typ_area border">
                           <div className="mx_buttn str_tp_dollar text-cenetr">
-                            $IBAT
+                            $Archie
                           </div>
                           <input
                             className="ariia"
@@ -146,7 +146,7 @@ export default function BasicTabs({setShoww}) {
                           </button>
                         </div>
                         <button className="btn btn-md lst_btnn mt-4 text-white">
-                          Unstake IBAT
+                          Unstake Archie
                         </button>
                       </div>
                     </div>
