@@ -36,6 +36,11 @@ function Lockestake({ setShoww, check }) {
   const [cradShow, setcradShow] = useState([]);
   const [stakeddata, setstakeddata] = useState();
   const [cardIndex, setcardIndex] = useState([]);
+  const [slectedAllnfton, setslectedAllnfton] = useState({
+    condition: false,
+    walletOfOwneron: [],
+  });
+  const [noSelectedAll, setnoSelectedAll] = useState([])
 
   const staking_Amount = async () => {
     try {
@@ -94,10 +99,11 @@ function Lockestake({ setShoww, check }) {
                 toast.success("Transaction Confirmed");
                 setspinner(false);
               } else {
-                if (selectedCard == null) {
+                if (cardIndex.length == 0) {
                   toast.error("Please Select NFT First!");
                   setspinner(false);
                 } else {
+                  console.log("selectedCard",selectedCard);
                   let min_Select = await stakingContractOf.methods
                     .minimumNFT()
                     .call();
@@ -167,7 +173,6 @@ function Lockestake({ setShoww, check }) {
   const SelectedCard = async (id) => {
     try {
       let change_Color = document.getElementById(id);
-      // console.log("change_Color",change_Color);
       change_Color.style.border = `5px solid rgb(56, 195, 207)`;
       change_Color.style.borderRadius = "35px";
       let check = [...cardIndex, id];
@@ -197,8 +202,11 @@ function Lockestake({ setShoww, check }) {
       if (acc != null) {
         let UserNFTs = await nFTContractOf.methods.walletOfOwner(acc).call();
 
+        // setslectedAllnfton({ walletOfOwneron: UserNFTs });
         let UserNFTs_Length = UserNFTs.length;
         // console.log("UserNFTs", UserNFTs_Length);
+        let nweArray = [];
+
         for (let i = 0; i < UserNFTs_Length; i++) {
           let nftLink = await axios.get(
             `https://teal-high-elephant-254.mypinata.cloud/ipfs/QmRN9mG46UtACjCmtwjnqz2pmDei2tUP6zB23NpFw8wk8C/${
@@ -210,7 +218,13 @@ function Lockestake({ setShoww, check }) {
             .call();
 
           if (isNFTStaked == true) {
-            setstakeddata(i);
+            setstakeddata(UserNFTs[i]);
+          }else{
+            nweArray = [...nweArray, UserNFTs[i]];
+            // console.log("TokenId",nweArray);
+            setnoSelectedAll(nweArray)
+              // setslectedAllnfton({ walletOfOwneron: nweArray });
+            
           }
           let imgurl = nftLink.config.url;
           // console.log("nftLink", nftLink.config.url);
@@ -223,6 +237,19 @@ function Lockestake({ setShoww, check }) {
       }
     } catch (e) {
       console.log("error While calling function", e);
+    }
+  };
+
+  const selectAllNFT = async () => {
+    try {
+      setslectedAllnfton({ condition: true });
+      console.log(
+        "slectedAllnfton.walletOfOwneron",
+        noSelectedAll
+      );
+      setcardIndex(noSelectedAll);
+    } catch (error) {
+      console.log("Error When SelectAll Nft Fuction", error);
     }
   };
 
@@ -382,13 +409,28 @@ function Lockestake({ setShoww, check }) {
       ) : (
         <>
           <div className="container">
-            {/* <div class="item-details-into"> */}
+            <div class={cradShow.length > 10 ? "item-details-into" : ""}>
               <div className="row">
+                {cradShow.length == 0 ? (
+                  <></>
+                ) : (
+                  <>
+                    <div className="btn_selected">
+                      <button
+                        className="btn end_canvas text-white me-auto"
+                        onClick={() => selectAllNFT()}
+                      >
+                        Select All
+                      </button>
+                    </div>
+                  </>
+                )}
                 {cradShow?.map((items, index) => {
-                  // console.log("items",items);
+                 
+
                   return (
                     <>
-                      <div className="col-lg-2 col-md-3 mt-3">
+                      <div className="col-lg-3 col-md-3 mt-3">
                         <div
                           className={
                             items.selecteddata == true
@@ -402,6 +444,12 @@ function Lockestake({ setShoww, check }) {
                               items.selecteddata == true
                                 ? "default"
                                 : "pointer",
+
+                            border:
+                              slectedAllnfton.condition == true &&
+                              items.selecteddata != true
+                                ? "5px solid rgb(56, 195, 207)"
+                                : "none",
                           }}
                           id={index}
                           onClick={() => SelectedCard(index)}
@@ -431,7 +479,7 @@ function Lockestake({ setShoww, check }) {
                   );
                 })}
               </div>
-            {/* </div> */}
+            </div>
           </div>
           {/* {acc == null ? (
             <Connent setShoww={setShoww} />
