@@ -208,7 +208,7 @@ function Lockestake({ setShoww, check }) {
             }.png`
           );
           let isNFTStaked = await stakingContractOf.methods
-            .isNFTStaked(i)
+            .isNFTStaked(UserNFTs[i+1])
             .call();
 
           if (isNFTStaked == true) {
