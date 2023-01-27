@@ -10,7 +10,7 @@
 }
 .game-item {
     text-align: center;
-    padding: 35px 30px;
+    padding: 35px 25px;
     border-radius: 10px;
     background: #350b2d;
     position: relative;
@@ -40,7 +40,7 @@
 @media (max-width: 1399px){
 
     .game-item__thumb {
-        height: 187px;
+        height: 150px;
     }
 }
 
@@ -68,7 +68,7 @@
     top: 0.1875rem;
     left: 0.1875rem;
     right: 0.1875rem;
-    height: 80%;
+    height: 60%;
     background: 50%/contain no-repeat;
     z-index: 0;
 }

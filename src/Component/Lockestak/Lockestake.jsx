@@ -70,7 +70,7 @@ function Lockestake({ setShoww, check }) {
               } else {
                 stakingContractOf = new web3.eth.Contract(Staking_Abi, Staking);
                 tokenContractOf = new web3.eth.Contract(
-                 Token_Abi,
+                  Token_Abi,
                   TokenAddress
                 );
               }
@@ -110,7 +110,7 @@ function Lockestake({ setShoww, check }) {
                     toast.error(`Select Minimum NFT ${min_Select}`);
                     setspinner(false);
                   } else {
-                    if (max_Select <cardIndex.length) {
+                    if (max_Select < cardIndex.length) {
                       toast.error(`Maximum NFT ${max_Select}`);
 
                       setspinner(false);
@@ -121,7 +121,7 @@ function Lockestake({ setShoww, check }) {
                           from: acc,
                         });
                       toast.success("Approve Confirmed");
-                      console.log("cardIndex",cardIndex);
+                      console.log("cardIndex", cardIndex);
                       await stakingContractOf.methods
                         .farm(stakingValue, selectDays, cardIndex)
                         .send({
@@ -171,12 +171,10 @@ function Lockestake({ setShoww, check }) {
       change_Color.style.border = `5px solid rgb(56, 195, 207)`;
       change_Color.style.borderRadius = "35px";
       let check = [...cardIndex, id];
-      let array_Length=check.length
-
+      let array_Length = check.length;
 
       console.log("checkcheck", array_Length);
       check = check.map(Number);
-
 
       setcardIndex(check);
 
@@ -208,7 +206,7 @@ function Lockestake({ setShoww, check }) {
             }.png`
           );
           let isNFTStaked = await stakingContractOf.methods
-            .isNFTStaked(UserNFTs[i+1])
+            .isNFTStaked(UserNFTs[i + 1])
             .call();
 
           if (isNFTStaked == true) {
@@ -384,53 +382,56 @@ function Lockestake({ setShoww, check }) {
       ) : (
         <>
           <div className="container">
-            <div className="row">
-              {cradShow?.map((items, index) => {
-                // console.log("items",items);
-                return (
-                  <>
-                    <div className="col-lg-3 mt-3">
-                      <div
-                        className={
-                          items.selecteddata == true
-                            ? "contain game-item disabled"
-                            : "game-item"
-                        }
-                        disabled={true}
-                        // class="game-item contain"
-                        style={{
-                         
-                          cursor:
-                            items.selecteddata == true ? "default" : "pointer",
-                        }}
-                        id={index}
-                        onClick={() => SelectedCard(index)}
-                      >
-                        <div class="game-inner">
-                          <div class="game-item__thumb">
-                            <img
-                              src={items.imgurl}
-                              alt="game"
-                              style={{ zIndex: "100000" }}
-                              className="image"
-                            />
-                            <div class="middle">
-                              <div class="text">Staked</div>
-                            </div>
-                            <div class="game-item__content">
-                              <h4 class="title">{items.tokenid}</h4>
+            {/* <div class="item-details-into"> */}
+              <div className="row">
+                {cradShow?.map((items, index) => {
+                  // console.log("items",items);
+                  return (
+                    <>
+                      <div className="col-lg-2 col-md-3 mt-3">
+                        <div
+                          className={
+                            items.selecteddata == true
+                              ? "contain game-item disabled"
+                              : "game-item"
+                          }
+                          disabled={true}
+                          // class="game-item contain"
+                          style={{
+                            cursor:
+                              items.selecteddata == true
+                                ? "default"
+                                : "pointer",
+                          }}
+                          id={index}
+                          onClick={() => SelectedCard(index)}
+                        >
+                          <div class="game-inner">
+                            <div class="game-item__thumb">
+                              <img
+                                src={items.imgurl}
+                                alt="game"
+                                style={{ zIndex: "100000" }}
+                                className="image"
+                              />
+                              <div class="middle">
+                                <div class="text">Staked</div>
+                              </div>
+                              <div class="game-item__content">
+                                <h4 class="title">{items.tokenid}</h4>
+                              </div>
                             </div>
                           </div>
+                          <div class="mask"> </div>
+                          <div class="ball"> </div>
                         </div>
-                        <div class="mask"> </div>
-                        <div class="ball"> </div>
                       </div>
                       {/* <img src={items} alt="" width="100%" className="border" /> */}
-                    </div>
-                  </>
-                );
-              })}
-            </div>
+                    </>
+                  );
+                })}
+              </div>
+            {/* </div> */}
           </div>
           {/* {acc == null ? (
             <Connent setShoww={setShoww} />

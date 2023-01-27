@@ -122,3 +122,8 @@ input[type=number] {
     background: linear-gradient(98.76deg, rgb(56, 195, 207) 0%, rgb(135, 103, 211) 100%) !important;
 /* background-size: cover; */
 }
+.item-details-into {
+    height: 400px;
+    overflow-y: scroll;
+    padding-right: 20px;
+}
