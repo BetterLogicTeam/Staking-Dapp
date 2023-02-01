@@ -54,7 +54,7 @@ export default function Mylock({ setShoww, check }) {
                     };
                     myArray = [...myArray, obj];
                 }
-    
+
                 setUserInformationStak(myArray);
 
 
@@ -86,22 +86,22 @@ export default function Mylock({ setShoww, check }) {
 
                 UserInformation.filter((items, index) => {
 
-                    console.log("items", items._NFTs);
-                    if (items._NFTs.length > 0) {
-                        array1 = UserInformation[index]._tokens;
-                        array2 = UserInformation[index]._stakeTime;
-                        array3 = UserInformation[index]._days;
 
-                        let currentTimestamp = array2;
-                        let date = moment(Number(array2) * 1000).format("DD-MM-YYYY");
-                        let obj = {
-                            address: acc,
-                            amount: web3.utils.fromWei(array1),
-                            unLoackTime: Number(currentTimestamp) + Number(1) * array3,
-                            LockTime: date,
-                        };
-                        myArray = [...myArray, obj];
-                    }
+                    // if (items._NFTs.length > 0) {
+                    array1 = UserInformation[index]._tokens;
+                    array2 = UserInformation[index]._stakeTime;
+                    array3 = UserInformation[index]._days;
+
+                    let currentTimestamp = array2;
+                    let date = moment(Number(array2) * 1000).format("DD-MM-YYYY");
+                    let obj = {
+                        address: acc,
+                        amount: web3.utils.fromWei(array1),
+                        unLoackTime: Number(currentTimestamp) + Number(1) * array3,
+                        LockTime: date,
+                    };
+                    myArray = [...myArray, obj];
+                    // }
 
                 })
 
@@ -225,42 +225,51 @@ export default function Mylock({ setShoww, check }) {
                             <tbody className="text-white " >
                                 {UserInformationStak?.map((items, index) => {
 
-                                    console.log("unloacktime", items.unLoackTime);
+                                    console.log("unloacktime", index);
                                     return (
                                         <>
-                                            <tr>
-                                                <th scope="row">
-                                                    {items.address?.substring(0, 4) +
-                                                        "..." +
-                                                        items.address?.substring(items.address?.length - 4)}
-                                                </th>
-                                                <td>{items.amount}</td>
-                                                <td>{items.LockTime}</td>
-                                                <td>
-                                                    {" "}
-                                                    <Countdown
-                                                        date={
-                                                            Date.now() +
-                                                            (parseInt(items.unLoackTime) * 1000 - Date.now())
-                                                        }
-                                                        renderer={renderer}
-                                                    />
-                                                </td>
+                                            {
+                                                items.amount == 0 ?
+                                                    <></>
+                                                    :
+                                                    <>
+                                                        <tr>
+                                                            <th scope="row">
+                                                                {items.address?.substring(0, 4) +
+                                                                    "..." +
+                                                                    items.address?.substring(items.address?.length - 4)}
+                                                            </th>
+                                                            <td>{items.amount}</td>
+                                                            <td>{items.LockTime}</td>
+                                                            <td>
+                                                                {" "}
+                                                                <Countdown
+                                                                    date={
+                                                                        Date.now() +
+                                                                        (parseInt(items.unLoackTime) * 1000 - Date.now())
+                                                                    }
+                                                                    renderer={renderer}
+                                                                />
+                                                            </td>
 
-                                                <td>
+                                                            <td>
 
-                                                    <Button
-                                                    
-                                                        onClick={() =>  check=="two" ? unstake(index): parseInt(items.unLoackTime) >= parseInt(Date.now() / 1000) ? confirm(index):unstake(index)}
-                                                        // onClick={() => timecompleted==false ? unstake(index):confirm(index)}
-                                                        className="unlockBTN text-white"
-                                                        disabled={  check=="two" ? parseInt(items.unLoackTime) >= parseInt(Date.now() / 1000) ? true : false:false}
-                                                    >
-                                                        UnStake
-                                                    </Button>
-                                                </td>
-                                                {/* <td><button className="btn btn-success unlockBTN" title="Tooltip on top">UnLock</button></td> */}
-                                            </tr>
+                                                                <Button
+
+                                                                    onClick={() => check == "two" ? unstake(index) : parseInt(items.unLoackTime) >= parseInt(Date.now() / 1000) ? confirm(index) : unstake(index)}
+                                                                    // onClick={() => timecompleted==false ? unstake(index):confirm(index)}
+                                                                    className="unlockBTN text-white"
+                                                                    disabled={check == "two" ? parseInt(items.unLoackTime) >= parseInt(Date.now() / 1000) ? true : false : false}
+                                                                >
+                                                                    UnStake
+                                                                </Button>
+                                                            </td>
+                                                            {/* <td><button className="btn btn-success unlockBTN" title="Tooltip on top">UnLock</button></td> */}
+                                                        </tr>
+                                                    </>
+
+                                            }
+
                                         </>
                                     );
                                 })}
