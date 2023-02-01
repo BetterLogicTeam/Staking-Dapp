@@ -11,7 +11,7 @@ import { toast } from 'react-toastify';
 import Connent from '../Connent/Connent';
 import './mylockStyle.css'
 
-export default function Mylock({ setShoww,check }) {
+export default function Mylock({ setShoww, check }) {
     let { provider, acc, providerType, web3 } = useSelector(
         (state) => state.connectWallet
     );
@@ -24,44 +24,99 @@ export default function Mylock({ setShoww,check }) {
             "https://bsc-testnet.public.blastapi.io"
         );
         let stakingContractOf
-        if(check=="one"){
-             stakingContractOf = new webSupply.eth.Contract(tokenStaking_Abi, tokenStaking);
-
-        }else{
-             stakingContractOf = new webSupply.eth.Contract(Staking_Abi, Staking);
-
-        }
+        if (check == "one") {
+            stakingContractOf = new webSupply.eth.Contract(tokenStaking_Abi, tokenStaking);
+            if (acc != null) {
 
 
-        if (acc != null) {
+                let UserInformation = await stakingContractOf.methods
+                    .UserInformation(acc)
+                    .call();
+                console.log("UserInformation", UserInformation
+                );
+
+                let array1 = UserInformation[0];
+                let array2 = UserInformation[1];
+                let array3 = UserInformation[2];
+                let myArray = [];
+                let currentTime = Math.floor(new Date().getTime() / 1000.0);
+                // console.log("Data", new Date(1673520674));
+                for (let i = 0; i < array1.length; i++) {
+                    // let date =new Date(Number(array3[i])*1000).toUTCString();
+                    let currentTimestamp = array3[i];
+                    // console.log("Type", Number(currentTimestamp) + Number(60) * array2[i]);
+                    let date = moment(Number(array3[i]) * 1000).format("DD-MM-YYYY");
+                    let obj = {
+                        address: acc,
+                        amount: web3.utils.fromWei(array1[i]),
+                        unLoackTime: Number(currentTimestamp) + Number(60) * array2[i],
+                        LockTime: date,
+                    };
+                    myArray = [...myArray, obj];
+                }
+    
+                setUserInformationStak(myArray);
 
 
-            let UserInformation = await stakingContractOf.methods
-                .UserInformation(acc)
-                .call();
 
-            let array1 = UserInformation[0];
-            let array2 = UserInformation[1];
-            let array3 = UserInformation[2];
-            let myArray = [];
-            let currentTime = Math.floor(new Date().getTime() / 1000.0);
-            // console.log("Data", new Date(1673520674));
-            for (let i = 0; i < array1.length; i++) {
-                // let date =new Date(Number(array3[i])*1000).toUTCString();
-                let currentTimestamp = array3[i];
-                // console.log("Type", Number(currentTimestamp) + Number(60) * array2[i]);
-                let date = moment(Number(array3[i]) * 1000).format("DD-MM-YYYY");
-                let obj = {
-                    address: acc,
-                    amount: web3.utils.fromWei(array1[i]),
-                    unLoackTime: Number(currentTimestamp) + Number(60) * array2[i],
-                    LockTime: date,
-                };
-                myArray = [...myArray, obj];
+
+
+
+
+                // setUserInformationStak(myArray);
             }
 
-            setUserInformationStak(myArray);
+        } else {
+            stakingContractOf = new webSupply.eth.Contract(Staking_Abi, Staking);
+            if (acc != null) {
+
+
+                let UserInformation = await stakingContractOf.methods
+                    .UserInformation(acc)
+                    .call();
+                console.log("UserInformation", UserInformation
+                );
+                // UserInformation=UserInformation[0]
+                let array1 = []
+                let array2 = []
+                let array3 = []
+
+                let myArray = [];
+                let currentTime = Math.floor(new Date().getTime() / 1000.0);
+
+                UserInformation.filter((items, index) => {
+
+                    console.log("items", items._NFTs);
+                    if (items._NFTs.length > 0) {
+                        array1 = UserInformation[index]._tokens;
+                        array2 = UserInformation[index]._stakeTime;
+                        array3 = UserInformation[index]._days;
+
+                        let currentTimestamp = array2;
+                        let date = moment(Number(array2) * 1000).format("DD-MM-YYYY");
+                        let obj = {
+                            address: acc,
+                            amount: web3.utils.fromWei(array1),
+                            unLoackTime: Number(currentTimestamp) + Number(1) * array3,
+                            LockTime: date,
+                        };
+                        myArray = [...myArray, obj];
+                    }
+
+                })
+
+
+
+
+
+
+
+                setUserInformationStak(myArray);
+            }
         }
+
+
+
     };
 
 
@@ -95,7 +150,9 @@ export default function Mylock({ setShoww,check }) {
 
             return (
                 <div className="text_days fs-5 ">
-                    {days} D {hours} H {minutes} M {seconds} S
+                    {/* {days} D {hours} H {minutes} M {seconds} S */}
+                    {days} : {hours} : {minutes} : {seconds}
+
 
                 </div>
             );
@@ -126,10 +183,10 @@ export default function Mylock({ setShoww,check }) {
 
             setspinner(true)
             let stakingContractOf
-            if(check=="one"){
+            if (check == "one") {
 
                 stakingContractOf = new web3.eth.Contract(tokenStaking_Abi, tokenStaking);
-            }else{
+            } else {
                 stakingContractOf = new web3.eth.Contract(Staking_Abi, Staking);
 
             }
@@ -150,10 +207,10 @@ export default function Mylock({ setShoww,check }) {
     };
     return (
         <div>
-         
+
             <div className="container-fluid p-0" >
-               
-                    <>
+
+                <>
                     <div className=''>
                         <table class="table mt-5 text-white h-100 " >
                             <thead>
@@ -168,7 +225,7 @@ export default function Mylock({ setShoww,check }) {
                             <tbody className="text-white " >
                                 {UserInformationStak?.map((items, index) => {
 
-                                    console.log("unloacktime", parseInt(items.unLoackTime) >= parseInt(Date.now() / 1000));
+                                    console.log("unloacktime", items.unLoackTime);
                                     return (
                                         <>
                                             <tr>
@@ -193,9 +250,11 @@ export default function Mylock({ setShoww,check }) {
                                                 <td>
 
                                                     <Button
-                                                        onClick={() => parseInt(items.unLoackTime) >= parseInt(Date.now() / 1000) ? confirm(index) : unstake(index)}
+                                                    
+                                                        onClick={() =>  check=="two" ? unstake(index): parseInt(items.unLoackTime) >= parseInt(Date.now() / 1000) ? confirm(index):unstake(index)}
                                                         // onClick={() => timecompleted==false ? unstake(index):confirm(index)}
                                                         className="unlockBTN text-white"
+                                                        disabled={  check=="two" ? parseInt(items.unLoackTime) >= parseInt(Date.now() / 1000) ? true : false:false}
                                                     >
                                                         UnStake
                                                     </Button>
@@ -208,8 +267,8 @@ export default function Mylock({ setShoww,check }) {
                             </tbody>
                         </table>
                     </div>
-                    </>
-                
+                </>
+
             </div>
 
         </div>

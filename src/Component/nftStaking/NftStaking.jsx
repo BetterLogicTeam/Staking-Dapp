@@ -33,15 +33,15 @@ export default function NftStaking({ setShoww }) {
 
 
         let UserInformation = await stakingContractOf.methods
-            .Users(acc)
+            .UserERC20Information(acc)
             .call();
             console.log("Users",UserInformation.DepositeToken);
 
-           let UserInformationdata=web3.utils.fromWei(UserInformation.DepositeToken)
-           let WithdrawRewardAmount=web3.utils.fromWei(UserInformation.WithdrawReward)
+           let UserInformationdata=web3.utils.fromWei(UserInformation[0])
+           let WithdrawRewardAmount=web3.utils.fromWei(UserInformation[1])
 
            setWithdrawReward(parseFloat(WithdrawRewardAmount).toFixed(3))
-            settotalUserAmount(UserInformationdata)
+            settotalUserAmount(parseFloat(UserInformationdata).toFixed(3))
     }
 
 

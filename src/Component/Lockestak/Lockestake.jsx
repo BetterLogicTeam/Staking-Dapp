@@ -103,7 +103,7 @@ function Lockestake({ setShoww, check }) {
                   toast.error("Please Select NFT First!");
                   setspinner(false);
                 } else {
-                  console.log("selectedCard",selectedCard);
+                  // console.log("selectedCard",selectedCard);
                   let min_Select = await stakingContractOf.methods
                     .minimumNFT()
                     .call();
@@ -170,15 +170,15 @@ function Lockestake({ setShoww, check }) {
     checkBalance();
   });
 
-  const SelectedCard = async (id) => {
+  const SelectedCard = async (id,tokenid) => {
     try {
       let change_Color = document.getElementById(id);
       change_Color.style.border = `5px solid rgb(56, 195, 207)`;
       change_Color.style.borderRadius = "35px";
-      let check = [...cardIndex, id];
+      let check = [...cardIndex, tokenid];
       let array_Length = check.length;
 
-      console.log("checkcheck", array_Length);
+      console.log("checkcheck", check);
       check = check.map(Number);
 
       setcardIndex(check);
@@ -210,11 +210,11 @@ function Lockestake({ setShoww, check }) {
         for (let i = 0; i < UserNFTs_Length; i++) {
           let nftLink = await axios.get(
             `https://teal-high-elephant-254.mypinata.cloud/ipfs/QmRN9mG46UtACjCmtwjnqz2pmDei2tUP6zB23NpFw8wk8C/${
-              UserNFTs[i + 1]
+              UserNFTs[i+1]
             }.png`
           );
           let isNFTStaked = await stakingContractOf.methods
-            .isNFTStaked(UserNFTs[i + 1])
+            .isNFTStaked(UserNFTs[i])
             .call();
 
           if (isNFTStaked == true) {
@@ -452,7 +452,7 @@ function Lockestake({ setShoww, check }) {
                                 : "none",
                           }}
                           id={index}
-                          onClick={() => SelectedCard(index)}
+                          onClick={() => SelectedCard(index,items.tokenid)}
                         >
                           <div class="game-inner">
                             <div class="game-item__thumb">
@@ -517,6 +517,7 @@ function Lockestake({ setShoww, check }) {
                       <button
                         type="button"
                         className="mx_buttn text-white "
+                        style={{cursor:"pointer"}}
                         onClick={() => setgetValue(balance)}
                       >
                         Max

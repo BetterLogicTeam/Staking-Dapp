@@ -4,6 +4,7 @@
     /* border: 1px solid #4c5199; */
     border: none;
     padding: 6px 0px !important;
+    cursor: pointer !important ;
 }
 
 .min_st_rt{
