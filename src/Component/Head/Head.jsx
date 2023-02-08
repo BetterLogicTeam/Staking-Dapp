@@ -29,7 +29,7 @@ function Head({ handleClosee, handleShoww, setShoww, showw }) {
                   NFT STAKING
                 </Nav.Link>
               </Link>
-              <Nav.Link eventKey={2} href="#memes">
+              <Nav.Link eventKey={2} >
                 <Canvas
                   handleClosee={handleClosee}
                   handleShoww={handleShoww}

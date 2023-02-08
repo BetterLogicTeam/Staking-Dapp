@@ -201,10 +201,10 @@ function Lockestake({ setShoww, check }) {
       let array = [];
       if (acc != null) {
         let UserNFTs = await nFTContractOf.methods.walletOfOwner(acc).call();
+        console.log("UserNFTs",UserNFTs);
 
         // setslectedAllnfton({ walletOfOwneron: UserNFTs });
         let UserNFTs_Length = UserNFTs.length;
-        // console.log("UserNFTs", UserNFTs_Length);
         let nweArray = [];
 
         for (let i = 0; i < UserNFTs_Length; i++) {
